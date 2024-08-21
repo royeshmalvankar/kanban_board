@@ -10,7 +10,7 @@ export const verifyToken = async(req, res, next) => {
     }
 
     if (authHeader) {
-        jwt.verify(authHeader, process.env.key,async (err, user) => {
+        jwt.verify(authHeader, process.env.Key,async (err, user) => {
             if (err) return res.status(403).json({ message: "something went wrong" });
             const userdetails = await UserModel.findOne({ _id: user.id });
             req.user = userdetails;

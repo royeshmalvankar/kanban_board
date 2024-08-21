@@ -36,7 +36,7 @@ userRoute.post("/register", async (req, res) => {
 userRoute.post("/login", async (req, res) => {
     const { email, password } = req.body;
     const user = await UserModel.findOne({email});
-    console.log(user);
+    console.log(user,process.env.Key);
     
    try {
      if(user){
@@ -45,7 +45,7 @@ userRoute.post("/login", async (req, res) => {
                  res.json({message:"something went wrong by comparing password",error:err});
              }
              if(result){
-                 const token = jwt.sign({ role:user.role,id:user._id}, process.env.key);
+                 const token = jwt.sign({ role:user.role,id:user._id}, process.env.Key);
                  res.json({message:"login successfully",token:token});
              }else{
                  res.json({message:"wrong password"});
