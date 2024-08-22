@@ -19,6 +19,7 @@ const Login = () => {
             {
                 login(resp.data.token);
                 localStorage.setItem("token",resp.data.token)
+                localStorage.setItem("isloggedIn",true)
                 navigate("/")
             }
             else

@@ -6,7 +6,7 @@ import axios, { AxiosError } from "axios"
 import "../App.css"
 import Loding from "../loading&error/Loding";
 import Error from "../loading&error/Error";
-import { Button } from "@chakra-ui/react";
+import { Button, Select } from "@chakra-ui/react";
 
 const Board = () => {
     const navigate = useNavigate();
@@ -14,15 +14,19 @@ const Board = () => {
     const [isLoding, setLoding] = useState(false)
     const [isError, setError] = useState(false)
     const [data, setdata] = useState([])
+    const [page, setPage] = useState(1)
+    const [limit, setLimit] = useState(10)
+    const [status, setStatus] = useState("")
+    const [last, setLast] = useState(0)
 
     useEffect(() => {
         getdata()
-    }, [])
+    }, [status, page])
 
     const getdata = async() => {
         setLoding(true)
         try {
-            const resp = await axios.get("https://kanban-board-bebk.onrender.com/board/all",{
+            const resp = await axios.get(`https://kanban-board-bebk.onrender.com/board/all?page=${page}&limit=${limit}&${status}`,{
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
@@ -72,6 +76,14 @@ const Board = () => {
         <br />
         <br />
         <br />
+        <Select value={status} onChange={(e)=>{setStatus(e.target.value)}} >
+            <option value="">All</option>
+            <option value="status=TODO">TODO</option>
+            <option value="status=INPROGRESS">INPROGRESS</option>
+            <option value="status=DONE">DONE</option>
+        </Select>
+        <br />
+        <br />
         <br />
         <div className="container">
             {
@@ -89,6 +101,15 @@ const Board = () => {
                 })
             }    
         </div>
+        <br />
+        <br />
+        <br />
+        <Button onClick={()=>{
+            setPage(page - 1)
+        }} disabled={page === 1}>Previous</Button>
+        <Button onClick={()=>{
+            setPage(page + 1)
+        }} disabled={data.length < limit}>Next</Button>
         </>
     )
 }

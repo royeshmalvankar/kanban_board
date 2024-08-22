@@ -10,6 +10,7 @@ import PrivateRoute from "../privateroute/privateroute"
 import UpdateBord from "../pages/updatebord"
 
 const AllRoutes = () => {
+    
 
     return (
         <Container maxW="10xl">
