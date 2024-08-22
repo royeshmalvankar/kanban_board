@@ -32,6 +32,8 @@ const Board = () => {
                 }
             })           
             setdata(resp.data.board)
+            console.log(resp);
+            
             setLoding(false)
         } catch (error) {
             setError(true)
