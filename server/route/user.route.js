@@ -36,7 +36,6 @@ userRoute.post("/register", async (req, res) => {
 userRoute.post("/login", async (req, res) => {
     const { email, password } = req.body;
     const user = await UserModel.findOne({email});
-    console.log(user,process.env.Key);
     
    try {
      if(user){

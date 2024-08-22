@@ -14,7 +14,6 @@ export const verifyToken = async(req, res, next) => {
             if (err) return res.status(403).json({ message: "something went wrong" });
             const userdetails = await UserModel.findOne({ _id: user.id });
             req.user = userdetails;
-            console.log(req.user);
             next();
         });
     } else {

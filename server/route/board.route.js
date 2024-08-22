@@ -13,7 +13,6 @@ boardRoute.post("/create",authRole("ADMIN","USER"), (req, res) => {
         status,
         userId:req.user._id
     });
-    console.log(board);
     try {
          board.save();
         res.json({message:"board created successfully"});
