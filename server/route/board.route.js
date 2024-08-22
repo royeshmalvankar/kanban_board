@@ -54,6 +54,30 @@ boardRoute.get("/all",authRole("ADMIN","USER"), async (req, res) => {
     }
 })
 
+boardRoute.get("/all/:id",authRole("ADMIN","USER"), async (req, res) => {
+    if(!req.user){
+        return res.json({message:"user not found"});
+    }
+    try {
+        if(req.user.role == "USER"){
+
+            const board = await BoardModel.find({userId:req.user._id,_id:req.params.id})
+            return res.json({message:"user board",board});
+        }
+        if(req.user.role == "ADMIN"){
+            const board = await BoardModel.find({_id:req.params.id})
+            return res.json({message:"admin board",board});
+        }
+        else{
+            return res.json({message:"User not authorized"});
+        }
+
+        
+    } catch (error) {
+        res.json({message:"something went wrong",error:error});
+    }
+})
+
 boardRoute.patch("/update/:id",authRole("ADMIN","USER"), async (req, res) => {
     const { task, description, status } = req.body;
     const uid = req.user._id.toString();  
