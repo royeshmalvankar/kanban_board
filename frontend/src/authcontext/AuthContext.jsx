@@ -16,12 +16,7 @@ export const AuthContextProvider = ({children}) => {
     const login = (token) => {
         setAuthdetails({isloggedIn: true, token: token})
         setUserauth({email: "", password: ""})
-    }
-    console.log(authdetails.isloggedIn);
-    
-    
-    
-
+    }  
 
     const logout = () => {
         setAuthdetails({isloggedIn: false, token: null})

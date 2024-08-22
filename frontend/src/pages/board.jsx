@@ -31,9 +31,9 @@ const Board = () => {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             })           
-            setdata(resp.data.board)
-            console.log(resp);
             
+            setdata(resp.data.board)
+            setLast(Math.ceil(resp.data.total/limit))
             setLoding(false)
         } catch (error) {
             setError(true)
@@ -57,6 +57,8 @@ const Board = () => {
 
         }
     }
+    console.log(last);
+    
 
     if(isLoding)
     {
@@ -108,10 +110,14 @@ const Board = () => {
         <br />
         <Button onClick={()=>{
             setPage(page - 1)
-        }} disabled={page === 1}>Previous</Button>
+        }} isDisabled={page === 1}>Previous</Button>
+        <Button>{page}</Button>
         <Button onClick={()=>{
             setPage(page + 1)
-        }} disabled={data.length < limit}>Next</Button>
+        }} isDisabled={data.length < limit} >Next</Button>
+        <br />
+        <br />
+        {data.length < 10 ? <Button onClick={()=>setPage(1)}>First Page</Button>: <Button onClick={()=>setPage(last)}>Last Page</Button>}
         </>
     )
 }

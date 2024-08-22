@@ -45,9 +45,10 @@ boardRoute.get("/all",authRole("ADMIN","USER"), async (req, res) => {
             return res.json({message:"user board",totalpages,board,total});
         }
         if(req.user.role == "ADMIN"){
+            total = await BoardModel.find().countDocuments();
             const board = await BoardModel.find(query)
             .skip(skip).limit(limit);
-            return res.json({message:"admin board",totalpages,board});
+            return res.json({message:"admin board",totalpages,board,total});
         }
         else{
             return res.json({message:"User not authorized"});
