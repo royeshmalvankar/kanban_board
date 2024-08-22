@@ -36,7 +36,7 @@ boardRoute.get("/all",authRole("ADMIN","USER"), async (req, res) => {
         query.status = status
     }
     totalpages=Math.ceil((await BoardModel.countDocuments())/limit)
-    totaldocument = await BoardModel.countDocuments()
+    let totaldocument = await BoardModel.countDocuments()
     try {
         if(req.user.role == "USER"){
 
