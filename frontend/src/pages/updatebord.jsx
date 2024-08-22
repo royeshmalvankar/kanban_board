@@ -23,16 +23,13 @@ const UpdateBord = () => {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
-            })
-            console.log(resp.data.board.task);
-            
+            })           
             setformstate({
                 ...formstate,
                 task: resp.data.board.task,
                 description: resp.data.board.description,
                 status: resp.data.board.status
             })
-            console.log(formstate);
             
         } catch (error) {
             console.log(error);

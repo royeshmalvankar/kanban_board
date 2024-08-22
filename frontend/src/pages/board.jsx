@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../authcontext/AuthContext";
 import { Link, useNavigate } from "react-router-dom"
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 import "../App.css"
 import Loding from "../loading&error/Loding";
 import Error from "../loading&error/Error";
@@ -36,14 +36,19 @@ const Board = () => {
 
     const deleteBoard = async(id) => {
         try {
-            await axios.delete(`https://kanban-board-bebk.onrender.com/board/delete/${id}`,{
+             await axios.delete(`https://kanban-board-bebk.onrender.com/board/delete/${id}`,{
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             })
             getdata()
+            alert("Board Deleted")
+            
         } catch (error) {
+            alert(error.response.data.message);
             console.log(error);
+            
+
         }
     }
 

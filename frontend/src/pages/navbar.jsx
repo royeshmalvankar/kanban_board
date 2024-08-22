@@ -16,7 +16,7 @@ const Navbar = () => {
         <Container maxW="10xl" width={"100%"} border={"1px solid black"} display={"flex"} justifyContent={"space-evenly"}>
             <ChakraLink  as={Reactrouterlink} to={"/"}>Home</ChakraLink> 
             <ChakraLink as={Reactrouterlink} to={"/create"}>Create</ChakraLink>
-            {isloggedIn && <ChakraLink as={Reactrouterlink} to={"/logout"}><Logout /></ChakraLink>}
+            {isloggedIn &&  <Logout />}
             {!isloggedIn && <ChakraLink as={Reactrouterlink} to={"/login"}>Login</ChakraLink>}
             {!isloggedIn && <ChakraLink as={Reactrouterlink} to={"/register"}>Register</ChakraLink>}
         </Container>

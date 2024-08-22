@@ -10,7 +10,7 @@ const CreateBord = () => {
         description: "",
         status: "",
     })
-    
+  
 
     const cb = () => {
         axios.post("https://kanban-board-bebk.onrender.com/board/create",{
@@ -20,8 +20,6 @@ const CreateBord = () => {
         },{ 
             headers: {  
                 "Authorization": `Bearer ${localStorage.getItem("token")}`}})
-
-
     }
 
     return (
@@ -43,7 +41,7 @@ const CreateBord = () => {
                 <option value="DONE">DONE</option>
             </Select>
             <br />
-            <Button onClick={cb}>Create</Button>
+            <Button type="reset" onClick={cb}>Create</Button>
         </FormControl>
         </Container>
 

@@ -32,11 +32,6 @@ const Login = () => {
         }
         
     }
-    // if(isloggedIn)
-    //     {
-    //         navigate("/")
-    //         console.log("isloggedIn",isloggedIn)
-    //     }
         let iserroremail = userauth.email === ""
         let iserrorpassword = userauth.password === ""
 
@@ -48,12 +43,12 @@ const Login = () => {
             <h1>Login</h1>
             <br />
                 <FormLabel>Email:</FormLabel>
-                    <Input placeholder='Enter Email' value={userauth.email}  onChange={(e)=>{setUserauth({...userauth, email: e.target.value})}}/>
+                    <Input placeholder='Enter Email' type="email" id="em" value={userauth.email}  onChange={(e)=>{setUserauth({...userauth, email: e.target.value})}}/>
                     {iserroremail ?<FormErrorMessage> Email is required</FormErrorMessage> : null}
                     <br />
                     <br />
                 <FormLabel>Password:</FormLabel>
-                    <Input placeholder='Enter Password' type="password" value={userauth.password} onChange={(e)=>{setUserauth({...userauth, password: e.target.value})}}/>
+                    <Input placeholder='Enter Password' type="password" id="pa" value={userauth.password} onChange={(e)=>{setUserauth({...userauth, password: e.target.value})}}/>
                     {iserrorpassword ?<FormErrorMessage> Password is required</FormErrorMessage> : null}
                     <br />
                     <br />

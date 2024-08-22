@@ -26,21 +26,25 @@ boardRoute.get("/all",authRole("ADMIN","USER"), async (req, res) => {
     if(!req.user){
         return res.json({message:"user not found"});
     }
-    let {page="1",limit="10"} = req.query;
+    let {page="1",limit="10",status} = req.query;
     let skip,totalpages;
     page=parseInt(page);
     limit=parseInt(limit);
     skip = (page-1)*limit
+    let query={}
+    if(status){
+        query.status = status
+    }
     totalpages=Math.ceil((await BoardModel.countDocuments())/limit)
     try {
         if(req.user.role == "USER"){
 
-            const board = await BoardModel.find({userId:req.user._id})
+            const board = await BoardModel.find({userId:req.user._id,query})
             .skip(skip).limit(limit);
             return res.json({message:"user board",totalpages,board});
         }
         if(req.user.role == "ADMIN"){
-            const board = await BoardModel.find()
+            const board = await BoardModel.find(query)
             .skip(skip).limit(limit);
             return res.json({message:"admin board",totalpages,board});
         }
