@@ -1,27 +1,51 @@
 import { Container, FormControl, FormLabel, Input, Button,Select } from "@chakra-ui/react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 
 const UpdateBord = () => {
-
-    const navigate = useNavigate()
     const [formstate, setformstate] = useState({
         task: "",
         description: "",
         status: "",
     })
-
+    useEffect(() => {
+        getdata()
+    },[])
+    const navigate = useNavigate()
+  
     const {id} = useParams()
+
+    const getdata = async() => {
+        try {
+            const resp = await axios.get(`https://kanban-board-bebk.onrender.com/board/all/${id}`,{
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+            console.log(resp.data.board.task);
+            
+            setformstate({
+                ...formstate,
+                task: resp.data.board.task,
+                description: resp.data.board.description,
+                status: resp.data.board.status
+            })
+            console.log(formstate);
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
     
 
     const ub = () => {
        try {
          axios.patch(`https://kanban-board-bebk.onrender.com/board/update/${id}`,{
-             task: formstate.task||null,
-             description: formstate.description || null,
-             status: formstate.status || null
+             task: formstate.task,
+             description: formstate.description,
+             status: formstate.status
          },{ 
              headers: {  
                  "Authorization": `Bearer ${localStorage.getItem("token")}`}})

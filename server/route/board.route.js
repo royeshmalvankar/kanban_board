@@ -61,11 +61,11 @@ boardRoute.get("/all/:id",authRole("ADMIN","USER"), async (req, res) => {
     try {
         if(req.user.role == "USER"){
 
-            const board = await BoardModel.find({userId:req.user._id,_id:req.params.id})
+            const board = await BoardModel.findOne({userId:req.user._id,_id:req.params.id})
             return res.json({message:"user board",board});
         }
         if(req.user.role == "ADMIN"){
-            const board = await BoardModel.find({_id:req.params.id})
+            const board = await BoardModel.findOne({_id:req.params.id})
             return res.json({message:"admin board",board});
         }
         else{
