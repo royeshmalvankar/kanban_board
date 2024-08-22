@@ -41,7 +41,7 @@ const Login = () => {
         <>
         <Container maxW="10xl" >
             <FormControl isInvalid={iserroremail || iserrorpassword}>
-            <h1>Login</h1>
+            <h1 style={{textAlign: "center", marginTop: "20px", marginBottom: "20px",fontSize: "30px"}}>Login</h1>
             <br />
                 <FormLabel>Email:</FormLabel>
                     <Input placeholder='Enter Email' type="email" id="em" value={userauth.email}  onChange={(e)=>{setUserauth({...userauth, email: e.target.value})}}/>

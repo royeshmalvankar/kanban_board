@@ -31,7 +31,7 @@ const Board = () => {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             })           
-            
+
             setdata(resp.data.board)
             setLast(Math.ceil(resp.data.total/limit))
             setLoding(false)
@@ -57,7 +57,6 @@ const Board = () => {
 
         }
     }
-    console.log(last);
     
 
     if(isLoding)
@@ -76,11 +75,9 @@ const Board = () => {
 
     return (
         <>
-        <h1>Board</h1>
+        <h1 style={{textAlign: "center", marginTop: "20px", marginBottom: "20px",fontSize: "30px"}}>Board</h1>
         <br />
-        <br />
-        <br />
-        <Select value={status} onChange={(e)=>{setStatus(e.target.value)}} >
+        <Select value={status} onChange={(e)=>{setStatus(e.target.value)}} boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" width={"50%"} margin={"auto"} >
             <option value="">All</option>
             <option value="status=TODO">TODO</option>
             <option value="status=INPROGRESS">INPROGRESS</option>
@@ -94,12 +91,12 @@ const Board = () => {
                 data.map((ele)=>{
                     return(
                         <div key={ele._id} className="board">
-                            <h1>Task: {ele.task}</h1>
-                            <h1>Description: {ele.description}</h1>
-                            <h1>Status: {ele.status}</h1>
-                            <h1>UserID: {ele.userId}</h1>
-                            <Button onClick={()=>deleteBoard(ele._id)}>Delete</Button>
-                            <Button><Link to={`/updatebord/${ele._id}`}>Update</Link></Button>
+                            <h1><span>Task:</span> {ele.task}</h1>
+                            <h1><span>Description:</span> {ele.description}</h1>
+                            <h1><span>Status:</span> {ele.status}</h1>
+                            <h1><span>User Id:</span> {ele.userId}</h1>
+                            <Button onClick={()=>deleteBoard(ele._id)} colorScheme="red" margin={"10px"} size="md">Delete</Button>
+                            <Button margin={"10px"} size="md"  colorScheme="blue"><Link to={`/updatebord/${ele._id}`} >Update</Link></Button>
                         </div>
                     )
                 })
@@ -110,14 +107,14 @@ const Board = () => {
         <br />
         <Button onClick={()=>{
             setPage(page - 1)
-        }} isDisabled={page === 1}>Previous</Button>
+        }} isDisabled={page === 1} margin={"10px"}>Previous</Button>
         <Button>{page}</Button>
         <Button onClick={()=>{
             setPage(page + 1)
-        }} isDisabled={data.length < limit} >Next</Button>
+        }} isDisabled={data.length < limit} margin={"10px"} paddingLeft={"30px"} paddingRight={"30px"}>Next</Button>
         <br />
         <br />
-        {data.length < 10 ? <Button onClick={()=>setPage(1)}>First Page</Button>: <Button onClick={()=>setPage(last)}>Last Page</Button>}
+        {data.length < 10 ? <Button onClick={()=>setPage(1)}>First Page</Button>: <Button onClick={()=>setPage(last)} margin={"10px"} >Last Page</Button>}
         </>
     )
 }

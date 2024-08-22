@@ -58,7 +58,7 @@ const UpdateBord = () => {
         <>
         <Container maxW="10xl">
         <FormControl>
-            <h1>Update Board</h1>
+            <h1 style={{textAlign: "center", marginTop: "20px", marginBottom: "20px",fontSize: "30px"}}>Update Board</h1>
             <br />
             <FormLabel>Task</FormLabel>
             <Input placeholder="Enter Task" value={formstate.task} onChange={(e)=>{setformstate({...formstate, task: e.target.value})}} />
