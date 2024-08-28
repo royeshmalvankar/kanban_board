@@ -9,7 +9,7 @@ import { verifyToken } from "./middleware/auth.middleware.js";
 dotenv.config();
 
 const app = express();
-
+app.use(express.json());
 const port = process.env.PORT || 5000
 
 app.use(cors(
@@ -17,10 +17,10 @@ app.use(cors(
         origin:"*",
     }
 ))
-app.use(express.json());
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :remote-user [:date[clf]]'));
 app.use("/user",userRoute)
 app.use("/board",verifyToken, boardRoute)
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :remote-user [:date[clf]]'));
+
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
