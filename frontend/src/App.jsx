@@ -1,6 +1,5 @@
 import AllRoutes from './allroute/allrouts'
 import './App.css'
-import Login from './pages/login'
 
 function App() {
 
@@ -9,7 +8,7 @@ function App() {
     console.log(resp1.data)
 }
 
-setInterval(interval, 840000)
+setInterval(interval, 500000)
 
   return (
     <>
