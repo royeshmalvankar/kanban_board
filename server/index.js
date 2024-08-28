@@ -23,6 +23,7 @@ app.use("/board",verifyToken, boardRoute)
 
 
 app.get("/", (req, res) => {
+    res.type("application/javascript");
     res.send("Hello World!");
 })
 
