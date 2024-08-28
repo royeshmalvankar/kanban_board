@@ -12,9 +12,9 @@ export const AuthContextProvider = ({children}) => {
         email: "",
         password: ""
     })
-    const [authdetails, setAuthdetails] = useState({isloggedIn: false, token: null})
-    const login = (token) => {
-        setAuthdetails({isloggedIn: true, token: token})
+    const [authdetails, setAuthdetails] = useState({isloggedIn: false})
+    const login = () => {
+        setAuthdetails({isloggedIn: true})
         setUserauth({email: "", password: ""})
     }  
 

@@ -4,12 +4,7 @@ import './App.css'
 function App() {
 
   const interval = async () => {
-    const resp1 = await axios.get("https://kanban-board-bebk.onrender.com/",
-    {
-        headers: {
-            "content-Type": "application/json",
-        }
-    })
+    const resp1 = await axios.get("https://kanban-board-bebk.onrender.com/")
     console.log(resp1.data)
 }
 
