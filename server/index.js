@@ -20,7 +20,7 @@ app.use(cors(
 app.use(express.json());
 app.use("/user",userRoute)
 app.use("/board",verifyToken, boardRoute)
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :remote-user [:date[clf]]'));
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
