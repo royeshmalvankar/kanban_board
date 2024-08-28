@@ -18,14 +18,16 @@ app.use(cors(
     }
 ))
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :remote-user [:date[clf]]'));
+app.use(express.static("public"));
 app.use("/user",userRoute)
 app.use("/board",verifyToken, boardRoute)
 
 
 app.get("/", (req, res) => {
-    res.type("application/javascript");
     res.send("Hello World!");
 })
+
+
 
 
 app.listen(port, async() => {
